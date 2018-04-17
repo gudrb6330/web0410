@@ -5,21 +5,44 @@
 </head>
 
 <body>
-<p>
-<form method="get" action="http://localhost:8080/">
-  <label for="name">GET으로 보낼 name:</label>
-  <input type="text" name="name" value="Jane Doe">
-  <input type="submit">
-</form>
+  <script id='template' style="text/template">
+<pre><%=url%></pre>
+  <p>
+  <form method="get" action="<%=url%>">
+    <label for="name">GET으로 보낼 name:</label>
+    <input type="text" name="name" value="Jane Doe">
+    <input type="submit">
+  </form>
+  </p>
+  <p>
+  <form method="post" action="<%=url%>">
+    <label for="name">POST로 보낼 name:</label>
+    <input type="text" name="name" value="John Doe">
+    <input type="submit">
+  </form>
 </p>
+  </script>
+  <p>
+    <form>
+      <label>URL:</label>
+      <input id="URL"  type="text">
+      <input id="urlsubmit" type="submit" value="GET/POST 폼 생성">
+    </form>
+  </p>
 
-<p>
-<form method="post" action="http://localhost:8080/">
-  <label for="name">POST로 보낼 name:</label>
-  <input type="text" name="name" value="John Doe">
-  <input type="submit">
-</form>
-</p>
+<!-- urlsubmit 버튼을 누르면 탬플릿 내용이 여기 나타나게 -->
+
+<div id='templateTarget'></div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js' />
+var tplContent = document.querySelector('#template').textContent;
+var tpl = _.template(tplContent);
+var tplTarget = document.querySelector('#templateTarget');
+tplTarget.innerHTML = tpl({url:'안기영'});
+
+function generateForms(){
+  tplTarget.innerHTML = tpl({trl:안기영});
+}
+</script>
 
 </body>
 </html>
